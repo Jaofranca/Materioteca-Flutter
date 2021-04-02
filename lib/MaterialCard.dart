@@ -2,6 +2,10 @@ import 'package:Materioteca_Flutter/MaterialType.dart';
 import 'package:flutter/material.dart';
 
 class MaterialCard extends StatelessWidget {
+  MaterialCard({this.nome, this.primeirotipo, this.segundotipo});
+  final String nome;
+  final String primeirotipo;
+  final String segundotipo;
   final String imagem =
       "https://tecnoblog.net/wp-content/uploads/2013/12/dogecoin1-e1611930600221.jpg";
   @override
@@ -34,15 +38,15 @@ class MaterialCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Metal",
+                    nome,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   MaterialTypeContainer(
-                    name: "Maleável",
+                    name: primeirotipo,
                     sizefont: 15,
                   ),
                   MaterialTypeContainer(
-                    name: "Maleável",
+                    name: segundotipo,
                     sizefont: 15,
                   ),
                 ],

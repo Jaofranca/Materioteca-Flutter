@@ -1,151 +1,120 @@
+import 'package:Materioteca_Flutter/CustomTextField.dart';
 import 'package:Materioteca_Flutter/MaterialCard.dart';
+import 'package:Materioteca_Flutter/material_Controller.dart';
 import 'package:flutter/material.dart';
-
-// class HomePage extends StatelessWidget {
-//   ScrollController _scrollController;
-//   TabController _tabcontroller;
-//   List<MaterialCard> cards = [];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//           body: CustomScrollView(
-//         slivers: [
-//           SliverAppBar(
-//             title: Text(
-//               'Materioteca IS.SMART',
-//               style: TextStyle(fontWeight: FontWeight.bold),
-//             ),
-//             centerTitle: true,
-//             floating: true,
-//             expandedHeight: 160.0,
-//             snap: true,
-//             flexibleSpace: FlexibleSpaceBar(
-//               title: Text("FlexibleSpace title"),
-//             ),
-//             bottom: TabBar(
-//               tabs: [
-//                 Tab(
-//                   text: "Metálicos",
-//                 ),
-//                 Tab(
-//                   text: "aluminios",
-//                 )
-//               ],
-//               controller: _tabcontroller,
-//             ),
-//           ),
-//           SliverList(
-//               delegate: SliverChildListDelegate([
-//             Padding(
-//               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-//               child:
-//             MaterialCard(),
-//             MaterialCard(),
-//             // Flexible(
-//             //   child: Column(
-//             //     children: cards,
-//             //   ),
-//             // )
-//           ]))
-//         ],
-//       )),
-//     );
-//   }
-// }
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomePage extends StatelessWidget {
-  bool textisTrue = false;
+  final Material_Controller material_controller = Material_Controller();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                actions: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: GestureDetector(
-                      child: Icon(Icons.ac_unit),
-                      onTap: () {
-                        if (textisTrue) {
-                          textisTrue = false;
-                        } else {
-                          textisTrue = true;
-                        }
-                      },
+    return SafeArea(
+      child: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  toolbarHeight: 100,
+                  actions: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 20),
+                      child: Observer(builder: (_) {
+                        return GestureDetector(
+                          child: material_controller.buttonPressed
+                              ? Icon(Icons.close)
+                              : Icon(Icons.search),
+                          onTap: material_controller.alterarbuttonPressed,
+                        );
+                      }),
+                    ),
+                  ],
+                  title: Observer(
+                    builder: (_) {
+                      return material_controller.buttonPressed
+                          ? Padding(
+                              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: CustomTextField())
+                          : Text(
+                              'Materioteca IS.SMART',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            );
+                    },
+                  ),
+                  centerTitle: true,
+                  floating: true,
+                  pinned: true,
+                  snap: true,
+                  bottom: TabBar(
+                    tabs: [
+                      Tab(text: "Metais"),
+                      Tab(
+                        text: "Cerâmicos",
+                      ),
+                      Tab(
+                        text: "Poliméricos",
+                      ),
+                      Tab(
+                        text: "Compósitos",
+                      )
+                    ],
+                  ),
+                )
+              ];
+            },
+            body: TabBarView(
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, i) => MaterialCard(
+                      nome: "Aço",
+                      primeirotipo: "Maleável",
+                      segundotipo: "teste",
                     ),
                   ),
-                ],
-                title: textisTrue
-                    ? TextField()
-                    : Text(
-                        'Materioteca IS.SMART',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                centerTitle: true,
-                floating: true,
-                pinned: true,
-                snap: true,
-                bottom: TabBar(
-                  tabs: [
-                    Tab(text: "Metais"),
-                    Tab(
-                      text: "Cerâmicos",
-                    ),
-                    Tab(
-                      text: "Poliméricos",
-                    ),
-                    Tab(
-                      text: "Compósitos",
-                    )
-                  ],
                 ),
-              )
-            ];
-          },
-          body: TabBarView(
-            children: [
-              Flexible(
-                child: Column(
-                  children: [
-                    MaterialCard(),
-                    MaterialCard(),
-                  ],
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, i) => MaterialCard(
+                      nome: "Metal",
+                      primeirotipo: "Maleável",
+                      segundotipo: "teste",
+                    ),
+                  ),
                 ),
-              ),
-              MaterialCard(),
-              MaterialCard(),
-              MaterialCard()
-            ],
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, i) => MaterialCard(
+                      nome: "Ferro",
+                      primeirotipo: "Maleável",
+                      segundotipo: "teste",
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, i) => MaterialCard(
+                      nome: "Cobre",
+                      primeirotipo: "Maleável",
+                      segundotipo: "teste",
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-// appBar: AppBar(
-//         title: Text('Materioteca IS.SMART'),
-//         centerTitle: true,
-//         elevation: 0,
-//         shadowColor: Colors.white,
-//       ),
-//       body:
-
-// SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               Padding(
-//                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-//                 child:
-//               ),
-//               MaterialCard(),
-//               MaterialCard(),
-//               MaterialCard()
-//             ],
-//           ),
-//         ),
