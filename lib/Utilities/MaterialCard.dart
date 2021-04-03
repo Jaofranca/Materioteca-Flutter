@@ -1,4 +1,5 @@
-import 'package:Materioteca_Flutter/MaterialType.dart';
+import 'package:Materioteca_Flutter/Screens/materialPageCard.dart';
+import 'package:Materioteca_Flutter/Utilities/MaterialType.dart';
 import 'package:flutter/material.dart';
 
 class MaterialCard extends StatelessWidget {
@@ -12,7 +13,19 @@ class MaterialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-      child: Container(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => MaterialPageCard(
+                child: this,
+                title: nome,
+              ),
+            ),
+          );
+        },
+        child: Container(
           height: 200,
           width: 300,
           decoration: BoxDecoration(
@@ -52,7 +65,9 @@ class MaterialCard extends StatelessWidget {
                 ],
               )
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

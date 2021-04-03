@@ -1,75 +1,46 @@
-import 'package:Materioteca_Flutter/CustomTextField.dart';
-import 'package:Materioteca_Flutter/MaterialCard.dart';
-import 'package:Materioteca_Flutter/material_Controller.dart';
+import 'package:Materioteca_Flutter/Screens/MaterialPageCard.dart';
+import 'package:Materioteca_Flutter/Utilities/MaterialCard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomePage extends StatelessWidget {
-  final Material_Controller material_controller = Material_Controller();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          body: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  toolbarHeight: 100,
-                  actions: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: Observer(builder: (_) {
-                        return GestureDetector(
-                          child: material_controller.buttonPressed
-                              ? Icon(Icons.close)
-                              : Icon(Icons.search),
-                          onTap: material_controller.alterarbuttonPressed,
-                        );
-                      }),
-                    ),
-                  ],
-                  title: Observer(
-                    builder: (_) {
-                      return material_controller.buttonPressed
-                          ? Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: CustomTextField())
-                          : Text(
-                              'Materioteca IS.SMART',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            );
-                    },
-                  ),
-                  centerTitle: true,
-                  floating: true,
-                  pinned: true,
-                  snap: true,
-                  bottom: TabBar(
-                    tabs: [
-                      Tab(text: "Metais"),
-                      Tab(
-                        text: "Cerâmicos",
-                      ),
-                      Tab(
-                        text: "Poliméricos",
-                      ),
-                      Tab(
-                        text: "Compósitos",
-                      )
-                    ],
-                  ),
-                )
-              ];
-            },
-            body: TabBarView(
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: Text(
+                  "Materioteca IS.SMART",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                toolbarHeight: 40,
+                centerTitle: true,
+                floating: true,
+                snap: true,
+              ),
+            ];
+          },
+          body: Expanded(
+            child: Column(
               children: [
+                // Text(
+                //   "Seja Bem vindo a uma",
+                //   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
+                // ),
+                // Text("Materioteca Digital",
+                //     style: TextStyle(
+                //         fontWeight: FontWeight.w500,
+                //         color: Colors.blue,
+                //         fontSize: 30)),
+                // Text(
+                //     "Essa plataforma tem como proposito catalogar materiais e suas propriedades,visando a utilização das informações no design de produtos "),
                 Flexible(
                   child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
-                    itemCount: 5,
+                    itemExtent: 4,
                     itemBuilder: (context, i) => MaterialCard(
                       nome: "Aço",
                       primeirotipo: "Maleável",
@@ -77,39 +48,33 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 5,
-                    itemBuilder: (context, i) => MaterialCard(
-                      nome: "Metal",
-                      primeirotipo: "Maleável",
-                      segundotipo: "teste",
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 5,
-                    itemBuilder: (context, i) => MaterialCard(
-                      nome: "Ferro",
-                      primeirotipo: "Maleável",
-                      segundotipo: "teste",
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 5,
-                    itemBuilder: (context, i) => MaterialCard(
-                      nome: "Cobre",
-                      primeirotipo: "Maleável",
-                      segundotipo: "teste",
-                    ),
-                  ),
-                ),
+                // Text(
+                //   "Sobre o projeto",
+                //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                // ),
+                // Text(
+                //     "A Materioteca consiste em um acervo de amostras de materiais "),
+                // Text("subdivididos nos diferentes grupos existentes,"),
+                // Text("enfocando todas as etapas dos seus ciclos de vida e"),
+                // Text("possíveis impactos ambientais associados."),
+                // Text("Inclui também a apresentação de referências"),
+                // MaterialCard(
+                //   nome: "Aço",
+                //   primeirotipo: "Maleável",
+                //   segundotipo: "Maleável",
+                // ),
+                // Flexible(
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     shrinkWrap: true,
+                //     itemExtent: 3,
+                //     itemBuilder: (context, i) => MaterialCard(
+                //       nome: "Aço",
+                //       primeirotipo: "Maleável",
+                //       segundotipo: "teste",
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
