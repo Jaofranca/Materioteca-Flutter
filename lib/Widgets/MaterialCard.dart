@@ -32,11 +32,12 @@ class MaterialCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                   color: Colors.grey.withOpacity(.5),
-                  blurRadius: 20.0, // soften the shadow
-                  spreadRadius: 0.0, //extend the shadow
+                  blurRadius: 2.0, // soften the shadow
+                  spreadRadius: 2.0, //extend the shadow
+
                   offset: Offset(
                     5.0, // Move to right 10  horizontally
-                    5.0,
+                    2.0,
                   ))
             ],
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -66,6 +67,36 @@ class MaterialCard extends StatelessWidget {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class BaseCard extends StatelessWidget {
+  BaseCard({this.imagem});
+  final String imagem;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Container(
+        height: 200,
+        width: 300,
+        decoration: BoxDecoration(
+          // boxShadow: [
+          //   BoxShadow(
+          //       color: Colors.grey.withOpacity(.5),
+          //       blurRadius: 2.0, // soften the shadow
+          //       spreadRadius: 2.0, //extend the shadow
+
+          //       offset: Offset(
+          //         5.0, // Move to right 10  horizontally
+          //         2.0,
+          //       ))
+          // ],
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          image: DecorationImage(image: AssetImage(imagem), fit: BoxFit.cover),
         ),
       ),
     );

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class MaterialTypeContainer extends StatelessWidget {
   MaterialTypeContainer({this.sizefont, this.name});
-  double sizefont;
-  String name;
+  final double sizefont;
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(

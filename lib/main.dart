@@ -1,6 +1,7 @@
-import 'package:Materioteca_Flutter/HomePage.dart';
 import 'package:Materioteca_Flutter/Screens/materialSearchPage.dart';
 import 'package:flutter/material.dart';
+
+import 'Screens/homePage.dart';
 
 void main() {
   runApp(MaterialApp(
